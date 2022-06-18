@@ -42,7 +42,7 @@ class Neighbourhood(models.Model):
          
 
 class Profile(models.Model):
-    name = models.OneToOneField(max_length=255)
+    name = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     p_photo = CloudinaryField(
