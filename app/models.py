@@ -45,9 +45,9 @@ class Profile(models.Model):
     name = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
-    location = models.CharField(max_length=255)
+    location = models.CharField(max_length=25, default='Nairobi')
     p_photo = CloudinaryField('image', default='https://res.cloudinary.com/fevercode/image/upload/v1654534329/default_n0r7rf.png')
-    bio = models.TextField(max_length=255)
+    bio = models.TextField(max_length=255, default='This is your bio', blank=True)
     def __str__(self):
         return f'{self.user.username} Profile'
         
