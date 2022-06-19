@@ -13,7 +13,7 @@ class Neighbourhood(models.Model):
      name = models.CharField(max_length=255)
      location = models.CharField(max_length=255)
      occupants = models.IntegerField()
-     admin = models.ForeignKey(User, on_delete=models.CASCADE)
+     admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mtaani')
      photo = CloudinaryField('image')
      description = models.TextField(max_length=255)
      hospital_tel = models.IntegerField(null=True, blank=True)
@@ -38,35 +38,28 @@ class Neighbourhood(models.Model):
         self.save()
         
      def __str__(self):
-         return self.NeighbourhoodName
+         return self.name
          
 
 class Profile(models.Model):
-    name = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     email = models.EmailField(max_length=255)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.SET_NULL, null=True, related_name='members', blank=True)
     location = models.CharField(max_length=25, default='Nairobi')
     p_photo = CloudinaryField('image', default='https://res.cloudinary.com/fevercode/image/upload/v1654534329/default_n0r7rf.png')
     bio = models.TextField(max_length=255, default='This is your bio', blank=True)
-    def __str__(self):
-        return f'{self.user.username} Profile'
     
-    #Override the save method to save the profile photo
-    def save(self):
-        super().save()
-        img = CloudinaryField.uploader.upload(self.p_photo.path)
-        
-        #resize image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size) # Resize the image
-            img.save(self.p_photo.path) # Save the image again and override the larger image
+    def __str__(self):
+        return f'{self.user.username} Profile' #show how we want it to be displayed
+    
+
         
         
 class Business(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(User , on_delete=models.CASCADE)
-    neighbourhood = models.ForeignKey(Neighbourhood , on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbourhood , on_delete=models.CASCADE, related_name='businesses')
     email = models.EmailField(max_length=255)
     
     def create_business(self):
@@ -95,8 +88,9 @@ class Business(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     post = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='post_owner')
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='mtaani_post')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     

@@ -1,25 +1,40 @@
-{% {% extends ' users/base.html' %}%}
+{%extends 'users/base.html'%}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary scrolling-navbar" id="nbar">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}"> <strong class="mr-4 brand">Updates Mtaani</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+<div style="margin-top: 100px" class="container">
+  <div style="margin-top:40px;" class="content-section">
     <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="">
-        <div class="media-body">
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
-        </div>
+      <img class="rounded-circle account-img" src="{{ user.profile.p_photo.url}}" width="200" height="200">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
     </div>
-    <!---Form Here-->
-    <form method="post" enctype="multipart/form-data>" {% csrf_token %} <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Personal Information</legend>
+    <!-- FORM HERE -->
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mt-3">Profile Info</legend>
         {{ u_form|crispy }}
-        <!--User form-->
+        <!-- User form -->
         {{ p_form|crispy }}
-        <!--Profile form-->
-        </fieldset>
-        <div class="form-group">
-            <button type="submit" class="btn btn-outline-info">Update</button>
-        </div>
+        <!-- Profile form -->
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info mt-3" type="submit">Update</button>
+      </div>
+      <a class="d-block mx-auto">
+        <button class="btn btn-sm btn-info d-block mx-auto">Go Back</button>
+    </a>
     </form>
+  </div>
 </div>
-{%{% endblock %}%}
+    {% endblock %}
