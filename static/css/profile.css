@@ -1,5 +1,6 @@
-body {
-    background-color: #f9f9fa
+body { 
+    background-image: url("https://user-images.githubusercontent.com/66039545/174476089-07e765d9-fa67-4de5-9781-c4ba7d391f41.png");
+    
 }
 
 .padding {
@@ -134,4 +135,6 @@ p {
     transition: all 0.3s ease-in-out;
 }
 
+
+    
 

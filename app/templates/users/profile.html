@@ -1,4 +1,4 @@
-{%extends 'users/base.html'%}
+{% extends 'users/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary scrolling-navbar" id="nbar">
@@ -9,13 +9,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
       </nav>
-<div style="margin-top: 100px" class="container">
+<div style="margin-top: 100px" class="container text-white">
   <div style="margin-top:40px;" class="content-section">
     <div class="media">
       <img class="rounded-circle account-img" src="{{ user.profile.p_photo.url}}" width="200" height="200">
       <div class="media-body">
         <h2 class="account-heading">{{ user.username }}</h2>
-        <p class="text-secondary">{{ user.email }}</p>
+        <p class="text-info">{{ user.email }}</p>
       </div>
     </div>
     <!-- FORM HERE -->

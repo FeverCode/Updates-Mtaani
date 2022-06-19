@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    hoods = Neighbourhood.objects.all()
+    
+    return render(request, 'index.html', {'hoods': hoods})
 
 
 def profile(request):

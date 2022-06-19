@@ -42,7 +42,7 @@
                             <a href="#" class="link-primary mt-3">{{user.email}}</a>
 
                         <div>
-                                <p class="m-b-10 f-w-600 text-primary">Neighbourhood</p>
+                                <p class="m-b-10 f-w-600 text-primary mt-3">Neighbourhood</p>
                                 <h6 class="text-muted f-w-400">{{user.profile.neighbourhood}}</h6>
                             </div>
 
@@ -65,9 +65,7 @@
                         {% if user.id == post.user.id %}
                         <div class="row">
                             <div class="col">
-                                <a href="{% url 'project' post%}">
-                                    <img src="{{post.photo.url}}" alt="image 1" class="w-100 rounded-3">
-                                </a>
+                                <!-- Post -->
                             </div>
                         </div>
                         {% endif %}
@@ -76,7 +74,7 @@
 
 
                     <table class="table table-sm mt-5 mb-5">
-                        <h4> Posts </h4>
+                        <h4 class="text-center"> Posts </h4>
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
@@ -102,7 +100,7 @@
                     <button type="button" class="btn btn-info mb-5">Add Post</button>
 
                     <table class="table table-sm mb-5 mt-5">
-                        <h4> Businesses </h4>
+                        <h4 class="text-center"> Businesses </h4>
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
