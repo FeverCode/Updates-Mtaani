@@ -50,6 +50,17 @@ class Profile(models.Model):
     bio = models.TextField(max_length=255, default='This is your bio', blank=True)
     def __str__(self):
         return f'{self.user.username} Profile'
+    
+    #Override the save method to save the profile photo
+    def save(self):
+        super().save()
+        img = CloudinaryField.uploader.upload(self.p_photo.path)
+        
+        #resize image
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size) # Resize the image
+            img.save(self.p_photo.path) # Save the image again and override the larger image
         
         
 class Business(models.Model):
