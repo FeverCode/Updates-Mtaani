@@ -49,7 +49,7 @@ class Profile(models.Model):
         'image', default='https://res.cloudinary.com/fevercode/image/upload/v1654534329/default_n0r7rf.png')
     
     def __str__(self):
-        return self.name
+        return f'{self.user.username} Profile'
         
         
 class Business(models.Model):
