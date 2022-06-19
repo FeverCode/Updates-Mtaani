@@ -24,8 +24,9 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"> <img class="rounded-circle nav-img" src="" alt=""
-                            width="30">
+                        aria-haspopup="true" aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                                                                            src="{{user.profile.p_photo.url }}"
+                                                                            alt="" width="30">
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item text-center" href="">Profile</a>
