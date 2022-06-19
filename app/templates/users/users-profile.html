@@ -8,6 +8,51 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <form class="form-inline" method="get" action="">
+                        {% csrf_token %}
+                        <div class="md-form my-0">
+                            <input class="form-control mr-sm-2 " type="text" placeholder="Search Business" name="title"
+                                aria-label="Search">
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <a class="nav-link text-light" href="{% url 'index' %}">Posts</a>
+                    <a class="nav-link text-light" href="{% url 'index' %}">Business</a>
+                    <a class="nav-link text-light" href="{% url 'index' %}">Contacts</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-right">
+                {% comment %} {% if user.is_authenticated%} {% endcomment %}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                                                                            src="{{user.profile.p_photo.url }}"
+                                                                            alt="" width="30">
+                    </a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item text-center" href="{% url 'users-profile' %}">Profile</a>
+                        <hr>
+                        <a class="dropdown-item text-center" href="{% url 'profile'%}"> Edit profile</a>
+                        <hr>
+                        <a href="" class="text-secondary text-center dropdown-item">Log Out</a>
+
+
+                    </div>
+                </li>
+                {% comment %} {% else %} {% endcomment %}
+
+                <a href="" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
+                {% comment %} {% endif %} {% endcomment %}
+            </ul>
+        </div>
+    </div>
+</nav>
 </nav>
 <section class="h-100 gradient-custom-2">
     <div class="container py-5 h-100 mt-5">
@@ -41,7 +86,7 @@
 
                             <a href="#" class="link-primary mt-3">{{user.email}}</a>
 
-                        <div>
+                            <div>
                                 <p class="m-b-10 f-w-600 text-primary mt-3">Neighbourhood</p>
                                 <h6 class="text-muted f-w-400">{{user.profile.neighbourhood}}</h6>
                             </div>
@@ -61,65 +106,28 @@
                             <p class="lead fw-normal mb-0">Recent posts</p>
                             <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
                         </div>
-                        {% for post in posts %}
-                        {% if user.id == post.user.id %}
                         <div class="row">
+                            {% for post in posts %}
+                            {% if user.id == post.id %}
                             <div class="col">
-                                <!-- Post -->
+
+                                <div class="card" style="width: 18rem;">
+                                    <img src="{{post.photo.url}}" alt="class=" card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{post.title}}</h5>
+                                        <p class="card-text">{{post.post}}</p>
+                                        <p>{{post.created_on}}</p>
+                                    </div>
+                                </div>
+
+
+
                             </div>
                         </div>
                         {% endif %}
                         {% endfor %}
+
                     </div>
-
-
-                    <table class="table table-sm mt-5 mb-5">
-                        <h4 class="text-center"> Posts </h4>
-                        <thead>
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Post</th>
-                                <th scope="col">Mtaa</th>
-                                <th scope="col">Created</th>
-                                <th scope="col">Updated</th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <button type="button" class="btn btn-info mb-5">Add Post</button>
-
-                    <table class="table table-sm mb-5 mt-5">
-                        <h4 class="text-center"> Businesses </h4>
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">email</th>
-                                <th scope="col">Owner</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-info">Add Business</button>
-
                 </div>
             </div>
         </div>
@@ -132,4 +140,4 @@
 </div>
 <!-- End of container -->
 
-{% endblock%}
+{% endblock %}

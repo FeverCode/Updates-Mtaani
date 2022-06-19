@@ -88,14 +88,14 @@ class Business(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     post = models.TextField()
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='post_owner')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_owner')
+    photo = CloudinaryField('image', default='https://res.cloudinary.com/fevercode/image/upload/v1655640806/tim-mossholder-H6eaxcGNQbU-unsplash_aq5n8o.jpg')
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='mtaani_post')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.title
+        return f'{self.user.username} Post'
         
     def create_post(self):
         self.save()

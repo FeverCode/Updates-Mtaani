@@ -3,6 +3,8 @@ from .forms import *
 from django.contrib import messages
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def index(request):
@@ -38,3 +40,21 @@ def user_profile(request):
     profile = Profile.objects.all()
     posts = Post.objects.all().order_by('id').reverse()
     return render(request, 'users/users-profile.html', {'profile': profile, 'posts': posts})
+
+
+class CreatePostView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'photo','post','neighbourhood']
+    template_name = 'create_post.html'
+    success_url = '/'
+
+    #   ↓        ↓ method of the CreatePostView
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    #   ↓              ↓ method of the CreatePostView
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['tag_line'] = 'Create new post'
+        return data

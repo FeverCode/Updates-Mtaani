@@ -6,4 +6,5 @@ urlpatterns = [
     path('',views.index, name='index'),
     path('profile/', views.profile, name='profile'),
     path('user/profile/', views.user_profile, name='users-profile'),
+    path('new/post', views.CreatePostView.as_view(), name='new-post'),
 ]
