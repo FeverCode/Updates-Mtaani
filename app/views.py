@@ -46,7 +46,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'photo','post','neighbourhood']
     template_name = 'create_post.html'
-    success_url = '/'
+    success_url = 'post'
 
     #   ↓        ↓ method of the CreatePostView
     def form_valid(self, form):
@@ -58,3 +58,12 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         data = super().get_context_data(**kwargs)
         data['tag_line'] = 'Create new post'
         return data
+
+def post(request):
+    post = Post.objects.all()
+    return render(request, 'post.html', {'post': post})
+
+
+def business(request):
+    business = Business.objects.all()
+    return render(request, 'business.html', {'business': business})
