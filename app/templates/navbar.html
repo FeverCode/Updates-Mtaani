@@ -17,6 +17,11 @@
                         </div>
                     </form>
                 </li>
+                <li>
+                    <a class="nav-link text-light" href="{% url 'index' %}">Posts</a>
+                    <a class="nav-link text-light" href="{% url 'index' %}">Business</a>
+                    <a class="nav-link text-light" href="{% url 'index' %}">Contacts</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav navbar-right">
@@ -29,9 +34,9 @@
                                                                             alt="" width="30">
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item text-center" href="">Profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'users-profile' %}">Profile</a>
                         <hr>
-                        <a class="dropdown-item text-center" href="{%url 'profile'%}"> Edit profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'profile'%}"> Edit profile</a>
                         <hr>
                         <a href="" class="text-secondary text-center dropdown-item">Log Out</a>
 

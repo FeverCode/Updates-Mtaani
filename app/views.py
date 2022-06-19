@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib import messages
+from .models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -27,3 +29,10 @@ def profile(request):
 
     }
     return render(request, 'users/profile.html', context)
+
+
+@login_required
+def user_profile(request):
+    profile = Profile.objects.all()
+    posts = Post.objects.all().order_by('id').reverse()
+    return render(request, 'users/users-profile.html', {'profile': profile, 'posts': posts})
