@@ -1,1 +1,1 @@
-web: mtaani.wsgi
+web: gunicorn mtaani.wsgi
