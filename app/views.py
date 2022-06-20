@@ -111,16 +111,17 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         data = super().get_context_data(**kwargs)
         data['tag_line'] = 'Create new post'
         return data
-
+@login_required
 def post(request):
     post = Post.objects.all()
     return render(request, 'post.html', {'post': post})
 
-
+@login_required
 def business(request):
     business = Business.objects.all()
     return render(request, 'business.html', {'business': business})
 
+@login_required
 def contacts(request):
     contacts = Neighbourhood.objects.all()
     return render(request, 'contact.html', {'contacts': contacts})

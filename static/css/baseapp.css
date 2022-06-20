@@ -1,5 +1,11 @@
 body {
   background-color:  #eee;
+  background-image: url(https://user-images.githubusercontent.com/66039545/174527362-a64104e4-4ff7-4b07-a1c9-42a19d367299.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+ 
+
 }
 .title {
  
@@ -66,10 +72,3 @@ background-size: cover;
 }
 
 
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-display: block;
-height: auto;
-max-width: 100%;
-line-height: 1;
-width: 100%;
-}
