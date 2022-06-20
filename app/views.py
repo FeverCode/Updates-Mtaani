@@ -110,18 +110,17 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         return data
     
     
-
-class PostView(ListView):
+class PostView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'mtaani_post'
     
     
 
-@login_required
-def business(request):
-    business = Business.objects.all()
-    return render(request, 'business.html', {'business': business})
+class BusinessView(LoginRequiredMixin, ListView):
+    model = Business
+    template_name = 'business.html'
+    context_object_name = 'business'
 
 @login_required
 def contacts(request):

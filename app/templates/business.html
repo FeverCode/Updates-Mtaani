@@ -2,30 +2,25 @@
 {% load bootstrap5 %}
 {% load static%}
 {%block content%}
-<div style="margin-top:200px;" class="container">
-  <div class="card float-left">
-    <div class="row ">
 
-      <div class="col-sm-7">
-        <div class="card-block">
-          <!--           <h4 class="card-title">Small card</h4> -->
-          <h4>Business.</h4>
-          <p>City by the sun where you watch the evening sink your worries of the day</p>
-          <a href="#" class="btn btn-primary btn-sm">Join Neighborhood</a>
-        </div>
-      </div>
-
-      <div class="col-sm-5">
-        <img class="d-block w-100" src="https://user-images.githubusercontent.com/66039545/174473778-9c21017d-6a0d-4ec7-9a0c-1bfde4982f60.jpg" alt="" width="200" height="200" />
-      </div>
+{% for business in object_list %}
+<div style="margin-top:200px;" class="container d-flex justify-content-center">
+  <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">{{business.name}}</div>
+    <div class="card-body">
+      <p class="card-title text-muted">Contact: {{business.email}}</p>
+      <p class="card-text text-muted"> Business Owner: {{business.user}}</p>
+      <p class="card-text text-muted">Location: {{business.neighbourhood}}</p>
     </div>
   </div>
+</div>
 
+{% comment %} <div class="col-sm-5">
+  <img class="d-block w-100"
+    src="https://user-images.githubusercontent.com/66039545/174473778-9c21017d-6a0d-4ec7-9a0c-1bfde4982f60.jpg" alt=""
+    width="200" height="200" />
+</div> {% endcomment %}
+</div>
+</div>
+{% endfor %}
 {% endblock %}
-
-
-
-
-
-
-

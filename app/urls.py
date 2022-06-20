@@ -1,6 +1,6 @@
 from django.urls import path, include
 from app import views
-from .views import PostView, RegisterView
+from .views import BusinessView, PostView, RegisterView
 from django.contrib.auth import views as auth_views
 from .views import CustomLoginView, IndexView
 from .forms import LoginForm
@@ -21,7 +21,7 @@ urlpatterns = [
     path('user/profile/', views.user_profile, name='users-profile'),
     path('post/create/', views.CreatePostView.as_view(), name='new-post'),
     path('post/', PostView.as_view(), name='post'),
-    path('business/', views.business, name='business'),
+    path('business/', BusinessView.as_view(), name='business'),
     path('contacts/', views.contacts, name='contacts'),
    
 ]
