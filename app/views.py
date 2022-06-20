@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
 from django.contrib import messages
 from .models import *
@@ -121,4 +121,32 @@ class BusinessView(LoginRequiredMixin, ListView):
     model = Business
     template_name = 'business.html'
     context_object_name = 'business'
+
+
+# class HoodDetailView(DetailView):
+#     model = Neighbourhood
+#     template_name = 'hood.html'
+#     pk_url_kwarg = 'name'
+
+#     def get_queryset(self):
+#         return super().get_queryset().filter(Neighbourhood__name=self.kwargs['Neighbourhood'])
+
+
+def join_hood(request, id):
+    neighbourhood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('joined-hood')
+
+
+def leave_hood(request, id):
+    hood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.neighbourhood = None
+    request.user.profile.save()
+    return redirect('joined-hood')
+
+
+class JoinedHoodView(LoginRequiredMixin, ListView):
+    model = Neighbourhood
+    template_name = 'joined_hood.html'
 

@@ -1,8 +1,8 @@
 from django.urls import path, include
 from app import views
-from .views import BusinessView, PostView, RegisterView
+from .views import BusinessView, PostView, RegisterView, JoinedHoodView
 from django.contrib.auth import views as auth_views
-from .views import CustomLoginView, IndexView
+from .views import CustomLoginView, IndexView, DetailView
 from .forms import LoginForm
 from django.conf.urls import url
 
@@ -22,6 +22,9 @@ urlpatterns = [
     path('post/create/', views.CreatePostView.as_view(), name='new-post'),
     path('post/', PostView.as_view(), name='post'),
     path('business/', BusinessView.as_view(), name='business'),
+    path('join_hood/<id>', views.join_hood, name='join-hood'),
+    path('joined_hood/', JoinedHoodView.as_view(), name='joined-hood'),
+    path('leave_hood/<id>', views.leave_hood, name='leave-hood'),
    
    
 ]

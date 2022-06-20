@@ -168,7 +168,7 @@
                                    <p class="text-muted">Location: {{hood.location}}</p>
                                    <p class="text-muted">Occupants Count: {{hood.occupants}}</p>
 
-                                   <a href="#" class="btn btn-primary btn-sm float-right">Join Neighborhood</a>
+                                   <a href="{% url 'join-hood' hood.id %}" class="btn btn-primary btn-sm float-right">Join Neighborhood</a>
                             </div>
                      </div>
 

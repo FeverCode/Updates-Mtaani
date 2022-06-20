@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% load bootstrap5 %}
+{% load static%}
+{% block content %}
+
+{% for hood in object_list %}
+<div style="margin-top:100px;" class="container">
+       <div class="card mb-5">
+              <div class="row ">
+
+                     <div class="col-sm-7">
+                            <div class="card-block">
+                                   <!--           <h4 class="card-title">Small card</h4> -->
+                                   <h4>{{hood.name}}</h4>
+                                   <p>{{hood.description}}</p>
+                                   <p class="text-muted">Location: {{hood.location}}</p>
+                                   <p class="text-muted">Occupants Count: {{hood.occupants}}</p>
+                                    {% if request.user.profile.neighbourhood == hood %}
+                                    <a href="{% url 'leave-hood' hood.id %}" class="btn btn-danger btn-sm float-right">Leave Neighborhood</a>
+                                    {% elif not request.user.profile.neighbourhood %}
+                                   <a href="{% url 'join-hood' hood.id %}" class="btn btn-primary btn-sm float-right">Join Neighborhood</a>
+                                   {% endif %}
+                            </div>
+                     </div>
+
+                     <div class="col-sm-5">
+                            <img class="d-block w-100" src="{{hood.photo.url}}" alt="" width="250" height="250" />
+                     </div>
+              </div>
+       </div>
+{% endfor %}
+
+
+{% endblock %}
+
+
+
+
+
+
