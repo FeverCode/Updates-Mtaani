@@ -20,7 +20,7 @@
 If you are like me, You really do not know what is happening in your neighborhood most of the time. What if an important meeting happens, theft or even death would you not like to know about it. Updates Mtaani is a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.
 
 Live link to the project
-[Updates Mtaani](https://github.com/FeverCode/Updates-Mtaani)
+[Updates Mtaani](https://updates-mtaani.herokuapp.com/)
 
 ## Requirements
 
@@ -109,4 +109,3 @@ SOFTWARE.
 LinkedIn - [https://www.linkedin.com/in/gedion-onsongo-112543210/]
 
 Reddit - [https://www.reddit.com/user/stainscode]
-
