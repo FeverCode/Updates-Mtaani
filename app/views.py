@@ -6,9 +6,16 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
+def dispatch(self, request, *args, **kwargs):
+       # will redirect to the home page if a user tries to access the register page while logged in
+       if request.user.is_authenticated:
+            return redirect(to='/')
 
+        # else process dispatch as it otherwise normally would
+       return super(RegisterView, self).dispatch(request, *args, **kwargs)
 
 class RegisterView(View):
     form_class = RegisterForm
@@ -31,6 +38,23 @@ class RegisterView(View):
             return redirect('login')
 
         return render(request, self.template_name, {'form': form})
+    
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+
+    def form_valid(self, form):
+        remember_me = form.cleaned_data.get('remember_me')
+
+        if not remember_me:
+            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
+            self.request.session.set_expiry(0)
+
+            # Set session as modified to force data updates/cookie to be saved.
+            self.request.session.modified = True
+
+        # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
+        return super(CustomLoginView, self).form_valid(form)
 
 
 
