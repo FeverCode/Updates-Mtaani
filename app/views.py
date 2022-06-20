@@ -1,3 +1,4 @@
+from django.views import View
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib import messages
@@ -7,6 +8,35 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
+
+
+class RegisterView(View):
+    form_class = RegisterForm
+    initial = {'key': 'value'}
+    template_name = 'registration/register.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+
+            return redirect('login')
+
+        return render(request, self.template_name, {'form': form})
+
+
+
+
+
+
 def index(request):
     hoods = Neighbourhood.objects.all()
     
@@ -46,8 +76,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'photo','post','neighbourhood']
     template_name = 'create_post.html'
-    success_url = 'post'
-
+    success_url = 'post.html'
     #   ↓        ↓ method of the CreatePostView
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -67,3 +96,7 @@ def post(request):
 def business(request):
     business = Business.objects.all()
     return render(request, 'business.html', {'business': business})
+
+def contacts(request):
+    contacts = Neighbourhood.objects.all()
+    return render(request, 'contact.html', {'contacts': contacts})
