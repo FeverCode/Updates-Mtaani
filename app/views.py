@@ -122,8 +122,3 @@ class BusinessView(LoginRequiredMixin, ListView):
     template_name = 'business.html'
     context_object_name = 'business'
 
-@login_required
-def contacts(request):
-    contacts = Neighbourhood.objects.all()
-    return render(request, 'contact.html', {'contacts': contacts})
-

@@ -22,6 +22,6 @@ urlpatterns = [
     path('post/create/', views.CreatePostView.as_view(), name='new-post'),
     path('post/', PostView.as_view(), name='post'),
     path('business/', BusinessView.as_view(), name='business'),
-    path('contacts/', views.contacts, name='contacts'),
+   
    
 ]
