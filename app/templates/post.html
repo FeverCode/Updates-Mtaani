@@ -2,25 +2,29 @@
 {% load bootstrap5 %}
 {% load static%}
 {%block content%}
+
+{% for post in object_list %}
 <div style="margin-top:200px;" class="container">
-  <div class="card float-left">
+  <div class="card">
     <div class="row ">
 
       <div class="col-sm-7">
         <div class="card-block">
           <!--           <h4 class="card-title">Small card</h4> -->
-          <h4>Post.</h4>
-          <p>City by the sun where you watch the evening sink your worries of the day</p>
-          <a href="#" class="btn btn-primary btn-sm">Join Neighborhood</a>
+          <h4>{{post.title}}</h4>
+          <p>{{post.post}}</p>
+          <p class="text-muted">Posted by: {{post.user}}</p>
+          <p class="text-muted">Posted on: {{post.created_on}}</p>
+          <a href="#" class="btn btn-primary btn-sm">{{post.neighbourhood}}</a>
         </div>
       </div>
 
       <div class="col-sm-5">
-        <img class="d-block w-100" src="https://user-images.githubusercontent.com/66039545/174473778-9c21017d-6a0d-4ec7-9a0c-1bfde4982f60.jpg" alt="" width="200" height="200" />
+        <img class="d-block w-100" src="{{post.photo.url}}" alt="" width="200" height="255" />
       </div>
     </div>
   </div>
-
+{% endfor %}
 {% endblock %}
 
 
