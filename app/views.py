@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
 
 # Create your views here.
 def dispatch(self, request, *args, **kwargs):
@@ -95,10 +96,13 @@ def user_profile(request):
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
+    
     model = Post
     fields = ['title', 'photo','post','neighbourhood']
     template_name = 'create_post.html'
     success_url = reverse_lazy ('post')
+    
+    
     #   ↓        ↓ method of the CreatePostView
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -143,3 +147,16 @@ class JoinedHoodView(LoginRequiredMixin, ListView):
     model = Neighbourhood
     template_name = 'joined_hood.html'
 
+
+def search_results(request):
+
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_businesses = Business.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message": message, "business": searched_businesses})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message": message})

@@ -1,0 +1,32 @@
+{% extends 'base.html'%} 
+{% block content %}
+<div style="margin-top:100px" class="container">
+
+  <div class="row">
+    {% if business%}
+      <h2 class="text-white">Found {{ business|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 articles for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if business %}
+    {% for business in business %}
+    <div style="margin-top:200px;" class="container d-flex justify-content-center">
+  <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">{{business.name}}</div>
+    <div class="card-body">
+      <p class="card-title text-muted">Contact: {{business.email}}</p>
+      <p class="card-text text-muted"> Business Owner: {{business.user}}</p>
+      <p class="card-text text-muted">Location: {{business.neighbourhood}}</p>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

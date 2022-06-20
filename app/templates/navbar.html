@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <form class="form-inline" method="get" action="">
+                    <form class="form-inline" method="get" action="{% url 'search_results' %}">
                         {% csrf_token %}
                         <div class="md-form my-0">
-                            <input class="form-control mr-sm-2 " type="text" placeholder="Search Business" name="title"
+                            <input class="form-control mr-sm-2 " type="text" placeholder="Search Business" name="business"
                                 aria-label="Search">
                         </div>
                     </form>
