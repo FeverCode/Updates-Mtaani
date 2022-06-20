@@ -126,6 +126,10 @@ class BusinessView(LoginRequiredMixin, ListView):
     model = Business
     template_name = 'business.html'
     context_object_name = 'business'
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(BusinessView, self).get_context_data(*args, **kwargs)
+        return context
 
 
 @login_required
