@@ -79,7 +79,6 @@ Live link to the project
 + django 3.2
 + Cloudninary (for hosting images)
 + Heroku (for hosting the project)
-+ Rest framework (for API)
 
 ## Licence
 
