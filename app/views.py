@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 def dispatch(self, request, *args, **kwargs):
@@ -57,14 +58,10 @@ class CustomLoginView(LoginView):
         return super(CustomLoginView, self).form_valid(form)
 
 
-
-
-
-
-def index(request):
-    hoods = Neighbourhood.objects.all()
-    
-    return render(request, 'index.html', {'hoods': hoods})
+class IndexView(ListView):
+    model = Neighbourhood
+    template_name = 'index.html'
+    context_object_name = 'hoods'
 
 
 def profile(request):
