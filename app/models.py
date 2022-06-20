@@ -1,6 +1,5 @@
 import email
 from email.policy import default
-from this import d
 from django import http
 from django.db import models
 from django.contrib.auth.models import User
