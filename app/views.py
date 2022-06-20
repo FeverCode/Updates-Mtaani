@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
@@ -97,7 +98,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'photo','post','neighbourhood']
     template_name = 'create_post.html'
-    success_url = 'post.html'
+    success_url = reverse_lazy ('post')
     #   ↓        ↓ method of the CreatePostView
     def form_valid(self, form):
         form.instance.user = self.request.user

@@ -19,7 +19,7 @@ urlpatterns = [
     path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),name='password_reset_complete'),
     path('profile/', views.profile, name='profile'),
     path('user/profile/', views.user_profile, name='users-profile'),
-    path('post/create/', views.CreatePostView.as_view(), name='new-post'),
+    path('new/post', views.CreatePostView.as_view(), name='new-post'),
     path('post/', PostView.as_view(), name='post'),
     path('business/', BusinessView.as_view(), name='business'),
     path('join_hood/<id>', views.join_hood, name='join-hood'),

@@ -4,7 +4,8 @@
 {%block content%}
 
 {% for post in object_list %}
-<div style="margin-top:200px;" class="container">
+<div style="margin-top:100px;" class="container">
+  
   <div class="card">
     <div class="row ">
 
@@ -16,6 +17,7 @@
           <p class="text-muted">Posted by: {{post.user}}</p>
           <p class="text-muted">Posted on: {{post.created_on}}</p>
           <a href="#" class="btn btn-primary btn-sm">{{post.neighbourhood}}</a>
+          <a href="{% url 'new-post'%}" class="btn btn-info btn-sm float-right">Add Post</a>
         </div>
       </div>
 
