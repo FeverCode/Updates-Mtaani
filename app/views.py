@@ -123,15 +123,7 @@ class BusinessView(LoginRequiredMixin, ListView):
     context_object_name = 'business'
 
 
-# class HoodDetailView(DetailView):
-#     model = Neighbourhood
-#     template_name = 'hood.html'
-#     pk_url_kwarg = 'name'
-
-#     def get_queryset(self):
-#         return super().get_queryset().filter(Neighbourhood__name=self.kwargs['Neighbourhood'])
-
-
+@login_required
 def join_hood(request, id):
     neighbourhood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.neighbourhood = neighbourhood
