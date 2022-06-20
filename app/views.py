@@ -151,7 +151,7 @@ class JoinedHoodView(LoginRequiredMixin, ListView):
     model = Neighbourhood
     template_name = 'joined_hood.html'
 
-
+@login_required
 def search_results(request):
 
     if 'business' in request.GET and request.GET["business"]:
